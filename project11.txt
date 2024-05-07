@@ -1,0 +1,36 @@
+Building a Motor
+
+You can use the Simulator (tinkercad) if you do not have enought device and sensor
+
+
+const int temperaturePin=0;
+int red=13;
+int green=12;
+void setup()
+{
+  Serial.begin(9600);
+  pinMode(red,OUTPUT);
+  pinMode(green,OUTPUT);
+}
+void loop()
+{
+ 
+  float voltage,degreeC,degreeF;
+  voltage=getVoltage(temperaturePin);
+  degreeC=(voltage-0.5)*100.0;
+  Serial.print("  deg C: ");
+  Serial.print(degreeC);
+  if(degreeC>26){
+   digitalWrite(red,HIGH);
+  digitalWrite(green,LOW);
+  }else{
+    digitalWrite(red,LOW);
+  digitalWrite(green,HIGH);
+  }
+ 
+  delay(1000);
+}
+float getVoltage(int pin)
+{
+   return (analogRead(pin) * 0.004882814);
+}
